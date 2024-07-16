@@ -1,0 +1,15 @@
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Entity/bin/Debug/net8.0/Emp.Entity.deps.json
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Entity/bin/Debug/net8.0/Emp.Entity.dll
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Entity/bin/Debug/net8.0/Emp.Entity.pdb
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Entity/bin/Debug/net8.0/Emp.Core.dll
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Entity/bin/Debug/net8.0/Emp.Core.pdb
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Entity/obj/Debug/net8.0/Emp.Entity.csproj.AssemblyReference.cache
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Entity/obj/Debug/net8.0/Emp.Entity.GeneratedMSBuildEditorConfig.editorconfig
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Entity/obj/Debug/net8.0/Emp.Entity.AssemblyInfoInputs.cache
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Entity/obj/Debug/net8.0/Emp.Entity.AssemblyInfo.cs
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Entity/obj/Debug/net8.0/Emp.Entity.csproj.CoreCompileInputs.cache
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Entity/obj/Debug/net8.0/Emp.Entity.csproj.Up2Date
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Entity/obj/Debug/net8.0/Emp.Entity.dll
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Entity/obj/Debug/net8.0/refint/Emp.Entity.dll
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Entity/obj/Debug/net8.0/Emp.Entity.pdb
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Entity/obj/Debug/net8.0/ref/Emp.Entity.dll

@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Emp.Entity/1.0.0": {
+        "dependencies": {
+          "Emp.Core": "1.0.0"
+        },
+        "runtime": {
+          "Emp.Entity.dll": {}
+        }
+      },
+      "Emp.Core/1.0.0": {
+        "runtime": {
+          "Emp.Core.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Emp.Entity/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Emp.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -1,0 +1,11 @@
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Core/bin/Debug/net8.0/Emp.Core.deps.json
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Core/bin/Debug/net8.0/Emp.Core.dll
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Core/bin/Debug/net8.0/Emp.Core.pdb
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Core/obj/Debug/net8.0/Emp.Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Core/obj/Debug/net8.0/Emp.Core.AssemblyInfoInputs.cache
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Core/obj/Debug/net8.0/Emp.Core.AssemblyInfo.cs
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Core/obj/Debug/net8.0/Emp.Core.csproj.CoreCompileInputs.cache
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Core/obj/Debug/net8.0/Emp.Core.dll
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Core/obj/Debug/net8.0/refint/Emp.Core.dll
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Core/obj/Debug/net8.0/Emp.Core.pdb
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Core/obj/Debug/net8.0/ref/Emp.Core.dll
