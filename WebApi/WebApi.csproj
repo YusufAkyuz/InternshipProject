@@ -16,12 +16,12 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Automapper\" />
       <Folder Include="Extensions\" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Emp.Data\Emp.Data.csproj" />
+      <ProjectReference Include="..\Emp.Service\Emp.Service.csproj" />
     </ItemGroup>
 
 </Project>

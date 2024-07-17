@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ezCZrbrGKnDjoSBAdypTIoFy6cm2SiFanvKrbFokSneQofjb8A8rRQlWNcA5ftPMIxq5hyl45O//WScTIARqAA==",
+  "dgSpecHash": "AX3UeoBL3I6YvW/P9kVEVG9acC1PvWkoM0cWaoJsRo8SCLb/SAeAtYs10n/+WsaUGPqOFJaKZBd9+hVoYPUPEQ==",
   "success": true,
   "projectFilePath": "/Users/yusufakyuz/RiderProjects/InternshipProject/WebApi/WebApi.csproj",
   "expectedPackageFiles": [
+    "/Users/yusufakyuz/.nuget/packages/automapper/13.0.1/automapper.13.0.1.nupkg.sha512",
     "/Users/yusufakyuz/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/yusufakyuz/.nuget/packages/microsoft.aspnetcore.openapi/8.0.2/microsoft.aspnetcore.openapi.8.0.2.nupkg.sha512",
     "/Users/yusufakyuz/.nuget/packages/microsoft.bcl.asyncinterfaces/6.0.0/microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",

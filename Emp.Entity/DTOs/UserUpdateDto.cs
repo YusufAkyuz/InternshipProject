@@ -1,11 +1,7 @@
-using System.ComponentModel.DataAnnotations;
-using Emp.Entity.Enums;
+namespace Emp.Entity.DTOs;
 
-namespace Emp.Core.Entities.Concretes;
-
-public class EntityBase : IEntityBase
+public class UserUpdateDto
 {
-    public Guid Id { get; set; }
     public string Name { get; set; }
     public string LastName { get; set; }
     public string PhoneNumber { get; set; }
@@ -14,5 +10,4 @@ public class EntityBase : IEntityBase
     public string Salary { get; set; }
     public DateTime DateOfEntry { get; set; }
     public bool IsDeleted { get; set; }
-    public Role RoleOfEmp { get; set; }
 }
