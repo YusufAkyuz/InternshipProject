@@ -9,3 +9,4 @@
 /Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Core/obj/Debug/net8.0/refint/Emp.Core.dll
 /Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Core/obj/Debug/net8.0/Emp.Core.pdb
 /Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Core/obj/Debug/net8.0/ref/Emp.Core.dll
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Core/obj/Debug/net8.0/Emp.Core.sourcelink.json

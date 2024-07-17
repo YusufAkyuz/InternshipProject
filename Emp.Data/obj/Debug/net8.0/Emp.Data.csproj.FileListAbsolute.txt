@@ -17,3 +17,4 @@
 /Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Data/obj/Debug/net8.0/Emp.Data.pdb
 /Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Data/obj/Debug/net8.0/Emp.Data.genruntimeconfig.cache
 /Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Data/obj/Debug/net8.0/ref/Emp.Data.dll
+/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Data/obj/Debug/net8.0/Emp.Data.sourcelink.json
