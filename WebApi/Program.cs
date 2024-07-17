@@ -1,4 +1,5 @@
 using Emp.Data.Context;
+using Emp.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,8 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.DbContextExtension(builder.Configuration);
+builder.Services.RepositoryExtension(builder.Configuration);
+builder.Services.IUnitOfWorkExtension();
 
 
 var app = builder.Build();
