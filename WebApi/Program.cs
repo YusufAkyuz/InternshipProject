@@ -11,7 +11,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.DbContextExtension(builder.Configuration);
 builder.Services.RepositoryExtension(builder.Configuration);
-builder.Services.IUnitOfWorkExtension();
+builder.Services.UnitOfWorkExtension();
 builder.Services.UserServiceExtension();
 
 var app = builder.Build();
@@ -23,6 +23,14 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseRouting();
+app.UseAuthorization();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
+
 
 
 app.Run();

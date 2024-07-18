@@ -27,6 +27,19 @@ public class UserMap : IEntityTypeConfiguration<User>
             DateOfEntry = DateTime.UtcNow,
             IsDeleted = false,
             RoleOfEmp = Role.Employer
+        },
+        new User()
+        {
+            Id = Guid.Parse("00CEFD26-89CB-4C1C-9FCE-DDF1FF5A727C"),
+            Name = "Yusuf",
+            LastName = "Akyüz",
+            PhoneNumber = "05415125099",
+            Email = "yusufakyus47@gmail.com",
+            Department = "Back End Development",
+            Salary = "40000",
+            DateOfEntry = DateTime.UtcNow,
+            IsDeleted = false,
+            RoleOfEmp = Role.Employer
         });
     }
 }

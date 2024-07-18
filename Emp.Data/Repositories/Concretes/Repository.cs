@@ -2,7 +2,6 @@ using System.Linq.Expressions;
 using Emp.Core.Entities;
 using Emp.Data.Context;
 using Emp.Data.Repositories.Contracts;
-using Emp.Entity.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Emp.Data.Repositories.Concretes;
@@ -16,25 +15,28 @@ public class Repository<T> : IRepository<T> where T : class, IEntityBase, new()
         _dbContext = dbContext;
     }
 
-    private DbSet<T> Table          //Tabloya Bağlantı kurmamızı sağlayacak
+    private DbSet<T> Table
     {
         get => _dbContext.Set<T>();
     }
-    
+
     public async Task AddAsync(T entity)
     {
         await Table.AddAsync(entity);
     }
 
-    public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> predicate = null, params Expression<Func<T, object>>[] includedProperties)
+    public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? predicate = null, params Expression<Func<T, object>>[]? includedProperties)
     {
         IQueryable<T> query = Table;
-        if (query is not null)
+
+        // predicate null kontrolü
+        if (predicate != null)
         {
             query = query.Where(predicate);
         }
 
-        if (includedProperties.Any())
+        // includedProperties null kontrolü ve döngü
+        if (includedProperties != null && includedProperties.Any())
         {
             foreach (var item in includedProperties)
             {

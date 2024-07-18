@@ -22,7 +22,7 @@ public static class DataLayerExtensions
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         return services;
     }
-    public static IServiceCollection IUnitOfWorkExtension(this IServiceCollection services)
+    public static IServiceCollection UnitOfWorkExtension(this IServiceCollection services)
     {
         services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
         return services;

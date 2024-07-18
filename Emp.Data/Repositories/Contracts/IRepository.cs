@@ -7,8 +7,8 @@ public interface IRepository<T> where T : class, IEntityBase, new()
 {
     Task AddAsync(T entity);
 
-    Task<List<T>> GetAllAsync(Expression<Func<T, bool>> predicate = null,
-        params Expression<Func<T, Object>>[] includedProperties);
+    Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? predicate = null,
+        params Expression<Func<T, object>>[]? includedProperties);
 
     Task<T> GetByGuidAsync(Guid id);
     Task<T> UpdateAsync(T entity);

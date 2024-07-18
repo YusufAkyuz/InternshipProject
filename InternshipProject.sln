@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emp.Entity", "Emp.Entity\Em
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emp.Service", "Emp.Service\Emp.Service.csproj", "{9E34CA54-A342-4C1A-803D-1EFAF93A3177}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emp.Presentation", "Emp.Presentation\Emp.Presentation.csproj", "{FB8978A1-5392-4068-84C9-1A3E88BE7A49}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{9E34CA54-A342-4C1A-803D-1EFAF93A3177}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E34CA54-A342-4C1A-803D-1EFAF93A3177}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E34CA54-A342-4C1A-803D-1EFAF93A3177}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB8978A1-5392-4068-84C9-1A3E88BE7A49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB8978A1-5392-4068-84C9-1A3E88BE7A49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB8978A1-5392-4068-84C9-1A3E88BE7A49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB8978A1-5392-4068-84C9-1A3E88BE7A49}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

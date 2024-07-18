@@ -12,8 +12,8 @@ public class UserService : IUserService
     {
         _unitOfWork = unitOfWork;
     }
-    public Task<List<User>> GetAllUsersAsync()
+    public async Task<List<User>> GetAllUsersAsync()
     {
-        return _unitOfWork.GetRepository<User>().GetAllAsync();
+        return await _unitOfWork.GetRepository<User>().GetAllAsync();
     }
 }
