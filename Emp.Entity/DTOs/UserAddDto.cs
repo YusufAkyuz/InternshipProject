@@ -1,6 +1,6 @@
 namespace Emp.Entity.DTOs;
 
-public class UserUpdateDto
+public class UserAddDto
 {
     public string Name { get; set; }
     public string LastName { get; set; }
@@ -8,4 +8,5 @@ public class UserUpdateDto
     public string Email { get; set; }
     public string Department { get; set; }
     public string Salary { get; set; }
+    public DateTime EntryDate { get; set; }
 }

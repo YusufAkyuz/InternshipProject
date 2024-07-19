@@ -41,9 +41,6 @@ namespace Emp.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -74,10 +71,9 @@ namespace Emp.Data.Migrations
                         new
                         {
                             Id = new Guid("05625c09-4c13-42ca-a0d7-ab2d3465a65b"),
-                            DateOfEntry = new DateTime(2024, 7, 17, 13, 39, 56, 384, DateTimeKind.Utc).AddTicks(9480),
+                            DateOfEntry = new DateTime(2024, 7, 19, 12, 10, 10, 828, DateTimeKind.Utc).AddTicks(5920),
                             Department = "Back End Development",
                             Email = "yusufakyus47@gmail.com",
-                            IsDeleted = false,
                             LastName = "Akyüz",
                             Name = "Yusuf",
                             PhoneNumber = "05415125099",
@@ -87,10 +83,9 @@ namespace Emp.Data.Migrations
                         new
                         {
                             Id = new Guid("00cefd26-89cb-4c1c-9fce-ddf1ff5a727c"),
-                            DateOfEntry = new DateTime(2024, 7, 17, 13, 39, 56, 384, DateTimeKind.Utc).AddTicks(9480),
+                            DateOfEntry = new DateTime(2024, 7, 19, 12, 10, 10, 828, DateTimeKind.Utc).AddTicks(5920),
                             Department = "Back End Development",
                             Email = "yusufakyus47@gmail.com",
-                            IsDeleted = false,
                             LastName = "Akyüz",
                             Name = "Yusuf",
                             PhoneNumber = "05415125099",

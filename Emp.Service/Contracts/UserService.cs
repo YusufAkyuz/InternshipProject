@@ -16,4 +16,9 @@ public class UserService : IUserService
     {
         return await _unitOfWork.GetRepository<User>().GetAllAsync();
     }
+
+    public async Task<User> GetUserById(Guid userId)
+    {
+        return await _unitOfWork.GetRepository<User>().GetByGuidAsync(userId);
+    }
 }

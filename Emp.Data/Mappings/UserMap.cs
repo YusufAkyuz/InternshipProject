@@ -25,7 +25,6 @@ public class UserMap : IEntityTypeConfiguration<User>
             Department = "Back End Development",
             Salary = "40000",
             DateOfEntry = DateTime.UtcNow,
-            IsDeleted = false,
             RoleOfEmp = Role.Employer
         },
         new User()
@@ -38,7 +37,6 @@ public class UserMap : IEntityTypeConfiguration<User>
             Department = "Back End Development",
             Salary = "40000",
             DateOfEntry = DateTime.UtcNow,
-            IsDeleted = false,
             RoleOfEmp = Role.Employer
         });
     }

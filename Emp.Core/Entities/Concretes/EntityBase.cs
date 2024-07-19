@@ -13,6 +13,5 @@ public class EntityBase : IEntityBase
     public string Department { get; set; }
     public string Salary { get; set; }
     public DateTime DateOfEntry { get; set; }
-    public bool IsDeleted { get; set; }
     public Role RoleOfEmp { get; set; }
 }

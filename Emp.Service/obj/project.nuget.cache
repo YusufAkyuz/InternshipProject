@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "97e4qEUrREohpUWNeDv97hlwFvDOvW5XfYN9Kg7ClAr8PxfvScJ6wN30x17rf3LuHXfBepIlVhIRw5rkPQt9Nw==",
+  "dgSpecHash": "NnzqXcO37bTiw5eAep90HB4gtGqjEBg1JAr95uwF/aLxZ0r23KzM9UtE0Hg7Il0fYMydhB7IGXgYyS4ycI6Svg==",
   "success": true,
   "projectFilePath": "/Users/yusufakyuz/RiderProjects/InternshipProject/Emp.Service/Emp.Service.csproj",
   "expectedPackageFiles": [
     "/Users/yusufakyuz/.nuget/packages/automapper/13.0.1/automapper.13.0.1.nupkg.sha512",
+    "/Users/yusufakyuz/.nuget/packages/fluentvalidation/11.9.2/fluentvalidation.11.9.2.nupkg.sha512",
+    "/Users/yusufakyuz/.nuget/packages/fluentvalidation.aspnetcore/11.3.0/fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "/Users/yusufakyuz/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.9.2/fluentvalidation.dependencyinjectionextensions.11.9.2.nupkg.sha512",
     "/Users/yusufakyuz/.nuget/packages/microsoft.entityframeworkcore/8.0.4/microsoft.entityframeworkcore.8.0.4.nupkg.sha512",
     "/Users/yusufakyuz/.nuget/packages/microsoft.entityframeworkcore.abstractions/8.0.4/microsoft.entityframeworkcore.abstractions.8.0.4.nupkg.sha512",
     "/Users/yusufakyuz/.nuget/packages/microsoft.entityframeworkcore.analyzers/8.0.4/microsoft.entityframeworkcore.analyzers.8.0.4.nupkg.sha512",
