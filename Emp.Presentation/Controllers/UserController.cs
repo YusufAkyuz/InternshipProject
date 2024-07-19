@@ -78,32 +78,48 @@ namespace Emp.Presentation.Controllers
         public async Task<IActionResult> UpdateEmployee([FromQuery] Guid userId,
             [FromQuery] Guid employeeId, [FromBody] UserUpdateDto postUser)
         {
-            var user = await _userService.GetUserById(userId);
-            if (user.RoleOfEmp == Role.Employer)
+            var userMap = _mapper.Map<User>(postUser);
+            var result = await _validator.ValidateAsync(userMap);
+
+            if (result.IsValid)
             {
-                var employee = await _userService.GetUserById(employeeId);
-                if (employee is not null)
+                var user = await _userService.GetUserById(userId);
+                if (user.RoleOfEmp == Role.Employer)
                 {
-                    var map = _mapper.Map<User>(postUser);
-                    _mapper.Map(postUser, employee);
-                    await _dbContext.SaveChangesAsync();
-                    return Ok(postUser);
+                    var employee = await _userService.GetUserById(employeeId);
+                    if (employee is not null)
+                    {
+                        var map = _mapper.Map<User>(postUser);
+                        _mapper.Map(postUser, employee);
+                        await _dbContext.SaveChangesAsync();
+                        return Ok(postUser);
+                    }
                 }
+                return Forbid("Unauthorized action: User is not an employer.");
             }
-            return Forbid("Unauthorized action: User is not an employer.");
+            
+            result.AddToModelState(this.ModelState);
+            return BadRequest(ModelState);
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteEmployee([FromBody] Guid userId)
+        public async Task<IActionResult> DeleteEmployee([FromQuery] Guid userId, [FromBody] Guid employeeId)
         {
             var user = await _userService.GetUserById(userId);
             if (user.RoleOfEmp == Role.Employer)
             {
-                _dbContext.Remove(user);
-                await _dbContext.SaveChangesAsync();
-                return Ok(user);
+                var employee = _userService.GetUserById(employeeId);
+                if (employee is not null)
+                {
+                    _dbContext.Remove(employee);
+                    await _dbContext.SaveChangesAsync();
+                    return Ok(user);
+                }
+
+                return NotFound("No employee with this id value was found.");
             }
             return Forbid("Unauthorized action: User is not an employer.");
+
         }
     }
 }
