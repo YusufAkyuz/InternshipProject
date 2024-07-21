@@ -49,6 +49,11 @@ namespace Emp.Presentation.Controllers
                 if (user.RoleOfEmp == Role.Employer)
                 {
                     var map = _mapper.Map<User>(postUser);
+                    
+                    //TODO : ***************** Date İşlemi ve parse durumu sorulacak ****************
+                    
+                    string date = postUser.EntryDate.ToString();
+                    map.DateOfEntry = DateTime.Parse(postUser.EntryDate.ToString());
                     await _dbContext.AddAsync(map);
                     await _dbContext.SaveChangesAsync();
                     return Ok(postUser);
@@ -101,8 +106,9 @@ namespace Emp.Presentation.Controllers
             result.AddToModelState(this.ModelState);
             return BadRequest(ModelState);
         }
+        
 
-        [HttpDelete]
+        [HttpDelete("delete-employee")]
         public async Task<IActionResult> DeleteEmployee([FromQuery] Guid userId, [FromBody] Guid employeeId)
         {
             var user = await _userService.GetUserById(userId);
@@ -120,6 +126,29 @@ namespace Emp.Presentation.Controllers
             }
             return Forbid("Unauthorized action: User is not an employer.");
 
+        }
+        [HttpDelete("delete-employeeList")]
+        public async Task<IActionResult> DeleteEmployeeList([FromQuery] Guid userId, [FromBody] List<Guid> employeeIdList)
+        {
+            var user = await _userService.GetUserById(userId);
+            if (user.RoleOfEmp == Role.Employer)
+            {
+                List<User> employeeList = [];
+                foreach (var employeeId in employeeIdList)
+                {
+                    employeeList.Add(await _userService.GetUserById(employeeId));
+                }
+
+                foreach (var emp in employeeList)
+                {
+                    _dbContext.Remove(emp);
+                    await _dbContext.SaveChangesAsync();
+                }
+
+                return Ok(employeeList);
+
+            }
+            return Forbid("Unauthorized action: User is not an employer.");
         }
     }
 }

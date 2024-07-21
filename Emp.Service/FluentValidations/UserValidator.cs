@@ -34,12 +34,17 @@ using Emp.Entity.Entities;
              .NotNull().WithMessage("Salary cannot be null.")
              .MaximumLength(7).WithMessage("Salary of employee can max 9999999.");
 
-         RuleFor(x => x.DateOfEntry)
-             .NotEmpty().WithMessage("Date Of Entry is required.")
-             .NotEmpty().WithMessage("Date Of Entry cannot be null.");
+         // RuleFor(x => x.DateOfEntry)
+         //     .NotEmpty().WithMessage("Date Of Entry is required.")
+         //     .NotEmpty().WithMessage("Date Of Entry cannot be null.");
+
          
          RuleFor(x => x.Department)
              .NotEmpty().WithMessage("Department is required.")
              .NotEmpty().WithMessage("Department cannot be null.");
+     }
+     private bool BeAValidUtcDate(DateTime date)
+     {
+         return date.Kind == DateTimeKind.Utc;
      }
  }
