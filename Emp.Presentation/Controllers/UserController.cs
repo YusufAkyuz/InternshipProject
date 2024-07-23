@@ -31,17 +31,22 @@ namespace Emp.Presentation.Controllers
         }
 
         [HttpGet("employees")]
-        public async Task<IActionResult> GetAllUsers()
+        public async Task<IActionResult> GetAllUsers([FromQuery] int pageNumber, [FromQuery] int pageSize)
         {
-            var users = await _userService.GetAllUsersAsync();
+            var users = await _userService.GetAllUsersAsync(pageNumber, pageSize);
             return Ok(users);
         }
 
         [HttpPost("add-employee")]
         public async Task<IActionResult> AddEmployee([FromQuery] Guid userId, [FromBody] UserAddDto postUser)
         {
-            var userMap = _mapper.Map<User>(postUser);
-            var result = await _validator.ValidateAsync(userMap);
+            if (postUser is null)
+            {
+                return BadRequest("Post user is null");
+            }
+            
+            var employeeMap = _mapper.Map<User>(postUser);
+            var result = await _validator.ValidateAsync(employeeMap);
 
             if (result.IsValid)
             {
@@ -52,7 +57,6 @@ namespace Emp.Presentation.Controllers
                     
                     //TODO : ***************** Date İşlemi ve parse durumu sorulacak ****************
                     
-                    string date = postUser.EntryDate.ToString();
                     map.DateOfEntry = DateTime.Parse(postUser.EntryDate.ToString());
                     await _dbContext.AddAsync(map);
                     await _dbContext.SaveChangesAsync();

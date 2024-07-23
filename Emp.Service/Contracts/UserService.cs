@@ -12,9 +12,9 @@ public class UserService : IUserService
     {
         _unitOfWork = unitOfWork;
     }
-    public async Task<List<User>> GetAllUsersAsync()
+    public async Task<List<User>> GetAllUsersAsync(int pageNumber, int pageSize)
     {
-        return await _unitOfWork.GetRepository<User>().GetAllAsync();
+        return await _unitOfWork.GetRepository<User>().GetAllAsync(null, pageNumber, pageSize, null);
     }
 
     public async Task<User> GetUserById(Guid userId)

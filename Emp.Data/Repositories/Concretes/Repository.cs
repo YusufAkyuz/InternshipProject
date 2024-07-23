@@ -25,17 +25,19 @@ public class Repository<T> : IRepository<T> where T : class, IEntityBase, new()
         await Table.AddAsync(entity);
     }
 
-    public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? predicate = null, params Expression<Func<T, object>>[]? includedProperties)
+    public async Task<List<T>> GetAllAsync(
+        Expression<Func<T, bool>>? predicate = null, 
+        int pageNumber = 1, 
+        int pageSize = 10, 
+        params Expression<Func<T, object>>[]? includedProperties)
     {
         IQueryable<T> query = Table;
 
-        // predicate null kontrolü
         if (predicate != null)
         {
             query = query.Where(predicate);
         }
 
-        // includedProperties null kontrolü ve döngü
         if (includedProperties != null && includedProperties.Any())
         {
             foreach (var item in includedProperties)
@@ -44,8 +46,11 @@ public class Repository<T> : IRepository<T> where T : class, IEntityBase, new()
             }
         }
 
+        query = query.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+
         return await query.ToListAsync();
     }
+
 
     public async Task<T> GetByGuidAsync(Guid id)
     {
