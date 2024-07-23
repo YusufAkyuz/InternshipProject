@@ -10,6 +10,7 @@ using Emp.Entity.Enums;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Serilog;
 
 namespace Emp.Presentation.Controllers
 {
@@ -34,6 +35,10 @@ namespace Emp.Presentation.Controllers
         public async Task<IActionResult> GetAllUsers([FromQuery] int pageNumber, [FromQuery] int pageSize)
         {
             var users = await _userService.GetAllUsersAsync(pageNumber, pageSize);
+            if (users is null)
+            {
+                Log.Warning("Failed to retrieve employees from database.");
+            }
             return Ok(users);
         }
 
@@ -42,6 +47,7 @@ namespace Emp.Presentation.Controllers
         {
             if (postUser is null)
             {
+                Log.Error("Post user is null");
                 return BadRequest("Post user is null");
             }
             
@@ -57,13 +63,14 @@ namespace Emp.Presentation.Controllers
                     
                     //TODO : ***************** Date İşlemi ve parse durumu sorulacak ****************
                     
-                    map.DateOfEntry = DateTime.Parse(postUser.EntryDate.ToString());
+                    map.DateOfEntry = Convert.ToDateTime(map.DateOfEntry);
                     await _dbContext.AddAsync(map);
                     await _dbContext.SaveChangesAsync();
                     return Ok(postUser);
                 }
                 else
                 {
+                    Log.Warning("Unauthorized transaction");
                     return Forbid("Unauthorized action: User is not an employer.");
                 }
             }
@@ -79,6 +86,10 @@ namespace Emp.Presentation.Controllers
         public async Task<IActionResult> EmployeeInfo([FromQuery] Guid employeeId)
         {
             var user = await _userService.GetUserById(employeeId);
+            if (user is null)
+            {
+                Log.Warning("Failed to retrieve user transactions");
+            }
             return Ok(user);
         }
         
@@ -104,6 +115,7 @@ namespace Emp.Presentation.Controllers
                         return Ok(postUser);
                     }
                 }
+                Log.Warning("Unauthorized transaction");
                 return Forbid("Unauthorized action: User is not an employer.");
             }
             
@@ -128,6 +140,7 @@ namespace Emp.Presentation.Controllers
 
                 return NotFound("No employee with this id value was found.");
             }
+            Log.Warning("Unauthorized transaction");
             return Forbid("Unauthorized action: User is not an employer.");
 
         }
@@ -152,6 +165,7 @@ namespace Emp.Presentation.Controllers
                 return Ok(employeeList);
 
             }
+            Log.Warning("Unauthorized transaction");
             return Forbid("Unauthorized action: User is not an employer.");
         }
     }
