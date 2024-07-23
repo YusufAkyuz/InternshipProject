@@ -38,6 +38,7 @@ namespace Emp.Presentation.Controllers
             if (users is null)
             {
                 Log.Warning("Failed to retrieve employees from database.");
+                return NotFound("Failed to retrieve employees from database.");
             }
             return Ok(users);
         }
@@ -57,6 +58,11 @@ namespace Emp.Presentation.Controllers
             if (result.IsValid)
             {
                 var user = await _userService.GetUserById(userId);
+                if (user is null)
+                {
+                    Log.Error("No employer found with this id value..");
+                    return NotFound("No employer found with this id value..");
+                }
                 if (user.RoleOfEmp == Role.Employer)
                 {
                     var map = _mapper.Map<User>(postUser);
@@ -88,7 +94,8 @@ namespace Emp.Presentation.Controllers
             var user = await _userService.GetUserById(employeeId);
             if (user is null)
             {
-                Log.Warning("Failed to retrieve user transactions");
+                Log.Error("No employee with this id value was found.");
+                return NotFound("No employee with this id value was found.");
             }
             return Ok(user);
         }
@@ -98,12 +105,19 @@ namespace Emp.Presentation.Controllers
         public async Task<IActionResult> UpdateEmployee([FromQuery] Guid userId,
             [FromQuery] Guid employeeId, [FromBody] UserUpdateDto postUser)
         {
-            var userMap = _mapper.Map<User>(postUser);
-            var result = await _validator.ValidateAsync(userMap);
+            var employeeMap = _mapper.Map<User>(postUser);
+            var result = await _validator.ValidateAsync(employeeMap);
 
             if (result.IsValid)
             {
                 var user = await _userService.GetUserById(userId);
+                
+                if (user is null)
+                {
+                    Log.Error("No employee with this id value was found.");
+                    return NotFound("No employee with this id value was found.");
+                }
+                
                 if (user.RoleOfEmp == Role.Employer)
                 {
                     var employee = await _userService.GetUserById(employeeId);
@@ -113,6 +127,11 @@ namespace Emp.Presentation.Controllers
                         _mapper.Map(postUser, employee);
                         await _dbContext.SaveChangesAsync();
                         return Ok(postUser);
+                    }
+                    else
+                    {
+                        Log.Error("No employee found with this id value");
+                        return NotFound("No employee with this id value was found.");
                     }
                 }
                 Log.Warning("Unauthorized transaction");
@@ -128,6 +147,11 @@ namespace Emp.Presentation.Controllers
         public async Task<IActionResult> DeleteEmployee([FromQuery] Guid userId, [FromBody] Guid employeeId)
         {
             var user = await _userService.GetUserById(userId);
+            if (user is null)
+            {
+                Log.Error("No employee with this id value was found.");
+                return NotFound("No employee with this id value was found.");
+            }
             if (user.RoleOfEmp == Role.Employer)
             {
                 var employee = _userService.GetUserById(employeeId);
@@ -137,8 +161,11 @@ namespace Emp.Presentation.Controllers
                     await _dbContext.SaveChangesAsync();
                     return Ok(user);
                 }
-
-                return NotFound("No employee with this id value was found.");
+                else
+                {
+                    Log.Error("No employee found with this id value");
+                    return NotFound("No employee with this id value was found.");
+                }
             }
             Log.Warning("Unauthorized transaction");
             return Forbid("Unauthorized action: User is not an employer.");
@@ -148,6 +175,11 @@ namespace Emp.Presentation.Controllers
         public async Task<IActionResult> DeleteEmployeeList([FromQuery] Guid userId, [FromBody] List<Guid> employeeIdList)
         {
             var user = await _userService.GetUserById(userId);
+            if (user is null)
+            {
+                Log.Error("No employer found with this id value.");
+                return NotFound("No employer found with this id value.");
+            }
             if (user.RoleOfEmp == Role.Employer)
             {
                 List<User> employeeList = [];
