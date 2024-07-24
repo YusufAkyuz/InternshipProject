@@ -28,8 +28,9 @@ namespace Emp.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("DateOfEntry")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<string>("DateOfEntry")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Department")
                         .IsRequired()
@@ -71,7 +72,7 @@ namespace Emp.Data.Migrations
                         new
                         {
                             Id = new Guid("05625c09-4c13-42ca-a0d7-ab2d3465a65b"),
-                            DateOfEntry = new DateTime(2024, 7, 19, 12, 10, 10, 828, DateTimeKind.Utc).AddTicks(5920),
+                            DateOfEntry = "12-06-2024",
                             Department = "Back End Development",
                             Email = "yusufakyus47@gmail.com",
                             LastName = "Akyüz",
@@ -83,7 +84,7 @@ namespace Emp.Data.Migrations
                         new
                         {
                             Id = new Guid("00cefd26-89cb-4c1c-9fce-ddf1ff5a727c"),
-                            DateOfEntry = new DateTime(2024, 7, 19, 12, 10, 10, 828, DateTimeKind.Utc).AddTicks(5920),
+                            DateOfEntry = "12-06-2024",
                             Department = "Back End Development",
                             Email = "yusufakyus47@gmail.com",
                             LastName = "Akyüz",

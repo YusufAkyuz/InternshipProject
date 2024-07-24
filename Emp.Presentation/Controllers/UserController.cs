@@ -1,10 +1,7 @@
+using System.Web;
 using Emp.Service.Concretes;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections;
-using System.Threading.Tasks;
 using AutoMapper;
-using Emp.Data.Context;
 using Emp.Entity.DTOs;
 using Emp.Entity.Entities;
 using Emp.Entity.Enums;
@@ -22,17 +19,14 @@ namespace Emp.Presentation.Controllers
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
         private readonly IValidator<User> _validator;
-        private readonly IUserService _service;
 
         public UserController(IUserService userService, 
             IMapper mapper, 
-            IValidator<User> validator, 
-            IUserService service)
+            IValidator<User> validator)
         {
             _userService = userService;
             _mapper = mapper;
             _validator = validator;
-            _service = service;
         }
 
         [HttpGet("employees")]
@@ -64,8 +58,8 @@ namespace Emp.Presentation.Controllers
                 var user = await _userService.GetUserById(userId);
                 if (user is null)
                 {
-                    Log.Error("No employer found with this id value..");
-                    return NotFound("No employer found with this id value..");
+                    Log.Error("No employer found with this id value.");
+                    return NotFound("No employer found with this id value.");
                 }
                 if (user.RoleOfEmp == Role.Employer)
                 {
@@ -74,6 +68,7 @@ namespace Emp.Presentation.Controllers
                     //TODO : ***************** Date İşlemi ve parse durumu sorulacak ****************
                     
                     map.DateOfEntry = Convert.ToDateTime(map.DateOfEntry);
+                    
                     await _userService.AddAsync(map);
                     return Ok(postUser);
                 }
@@ -86,9 +81,17 @@ namespace Emp.Presentation.Controllers
             else
             {
                 result.AddToModelState(this.ModelState);
+                foreach (var state in ModelState)
+                {
+                    foreach (var error in state.Value.Errors)
+                    {
+                        Log.Error($"Validation failed for {state.Key} : {error.ErrorMessage}");
+                    }
+                }
                 return BadRequest(ModelState);
             }
         }
+
     
 
         [HttpGet("get_employee_info")]
@@ -142,12 +145,19 @@ namespace Emp.Presentation.Controllers
             }
             
             result.AddToModelState(this.ModelState);
+            foreach (var state in ModelState)
+            {
+                foreach (var error in state.Value.Errors)
+                {
+                    Log.Error($"Validation failed for {state.Key} : {error.ErrorMessage}");
+                }
+            }
             return BadRequest(ModelState);
         }
         
         // ------- TODO : Searching process will include in the project
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> Search([FromQuery] string name, [FromQuery] string lastName)
+        [HttpGet("search-employee")]
+        public async Task<ActionResult<IEnumerable<User>>> Search([FromQuery] string? name, [FromQuery] string? lastName)
         {
             try
             {
@@ -156,11 +166,11 @@ namespace Emp.Presentation.Controllers
                 {
                     return Ok(result);
                 }
-
                 return NotFound("No user with this name or surname was found.");
             }
             catch (Exception e)
             {
+                Log.Error("Error retrieving data from the DB.");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the DB.");
             }
         }

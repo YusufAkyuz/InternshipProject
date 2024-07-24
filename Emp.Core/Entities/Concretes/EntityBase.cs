@@ -14,9 +14,5 @@ public class EntityBase : IEntityBase
     public string Salary { get; set; }
     public DateTime DateOfEntry { get; set; }
     public Role RoleOfEmp { get; set; }
-
-    public EntityBase()
-    {
-        DateOfEntry = DateTime.UtcNow;
-    }
+    
 }
