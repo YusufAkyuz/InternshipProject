@@ -1,6 +1,7 @@
 using Emp.Service.Concretes;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections;
 using System.Threading.Tasks;
 using AutoMapper;
 using Emp.Data.Context;
@@ -9,7 +10,7 @@ using Emp.Entity.Entities;
 using Emp.Entity.Enums;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Http;
 using Serilog;
 
 namespace Emp.Presentation.Controllers
@@ -19,16 +20,19 @@ namespace Emp.Presentation.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly AppDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly IValidator<User> _validator;
+        private readonly IUserService _service;
 
-        public UserController(IUserService userService, AppDbContext dbContext, IMapper mapper, IValidator<User> validator)
+        public UserController(IUserService userService, 
+            IMapper mapper, 
+            IValidator<User> validator, 
+            IUserService service)
         {
             _userService = userService;
-            _dbContext = dbContext;
             _mapper = mapper;
             _validator = validator;
+            _service = service;
         }
 
         [HttpGet("employees")]
@@ -70,8 +74,7 @@ namespace Emp.Presentation.Controllers
                     //TODO : ***************** Date İşlemi ve parse durumu sorulacak ****************
                     
                     map.DateOfEntry = Convert.ToDateTime(map.DateOfEntry);
-                    await _dbContext.AddAsync(map);
-                    await _dbContext.SaveChangesAsync();
+                    await _userService.AddAsync(map);
                     return Ok(postUser);
                 }
                 else
@@ -123,10 +126,10 @@ namespace Emp.Presentation.Controllers
                     var employee = await _userService.GetUserById(employeeId);
                     if (employee is not null)
                     {
-                        var map = _mapper.Map<User>(postUser);
                         _mapper.Map(postUser, employee);
-                        await _dbContext.SaveChangesAsync();
-                        return Ok(postUser);
+                        employee.DateOfEntry = Convert.ToDateTime(postUser.DateOfEntry);
+                        await _userService.UpdateAsync(employee);
+                        return Ok(employee);
                     }
                     else
                     {
@@ -142,24 +145,44 @@ namespace Emp.Presentation.Controllers
             return BadRequest(ModelState);
         }
         
+        // ------- TODO : Searching process will include in the project
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<User>>> Search([FromQuery] string name, [FromQuery] string lastName)
+        {
+            try
+            {
+                var result = await _userService.SearchAsync(name, lastName);
+                if (result.Any())
+                {
+                    return Ok(result);
+                }
 
+                return NotFound("No user with this name or surname was found.");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the DB.");
+            }
+        }
+        
+        
         [HttpDelete("delete-employee")]
         public async Task<IActionResult> DeleteEmployee([FromQuery] Guid userId, [FromBody] Guid employeeId)
         {
             var user = await _userService.GetUserById(userId);
             if (user is null)
             {
-                Log.Error("No employee with this id value was found.");
-                return NotFound("No employee with this id value was found.");
+                Log.Error("No employer with this id value was found.");
+                return NotFound("No employer with this id value was found.");
             }
             if (user.RoleOfEmp == Role.Employer)
             {
-                var employee = _userService.GetUserById(employeeId);
+                var employee = await _userService.GetUserById(employeeId);
                 if (employee is not null)
                 {
-                    _dbContext.Remove(employee);
-                    await _dbContext.SaveChangesAsync();
-                    return Ok(user);
+                    //var employee = _mapper.Map<User>(employeeTask);
+                    await _userService.DeleteAsync(employee);
+                    return Ok(employee);
                 }
                 else
                 {
@@ -190,8 +213,7 @@ namespace Emp.Presentation.Controllers
 
                 foreach (var emp in employeeList)
                 {
-                    _dbContext.Remove(emp);
-                    await _dbContext.SaveChangesAsync();
+                    await _userService.DeleteAsync(emp);
                 }
 
                 return Ok(employeeList);
@@ -200,5 +222,7 @@ namespace Emp.Presentation.Controllers
             Log.Warning("Unauthorized transaction");
             return Forbid("Unauthorized action: User is not an employer.");
         }
+        
+        
     }
 }

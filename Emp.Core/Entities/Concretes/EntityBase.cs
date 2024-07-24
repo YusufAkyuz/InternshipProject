@@ -12,6 +12,11 @@ public class EntityBase : IEntityBase
     public string Email { get; set; }
     public string Department { get; set; }
     public string Salary { get; set; }
-    public DateTime DateOfEntry { get; set; } = DateTime.UtcNow;
+    public DateTime DateOfEntry { get; set; }
     public Role RoleOfEmp { get; set; }
+
+    public EntityBase()
+    {
+        DateOfEntry = DateTime.UtcNow;
+    }
 }

@@ -8,4 +8,5 @@ public class UserUpdateDto
     public string Email { get; set; }
     public string Department { get; set; }
     public string Salary { get; set; }
+    public DateTime DateOfEntry { get; set; }
 }
