@@ -22,7 +22,7 @@ public class UserService : IUserService
     {
         return await _unitOfWork.GetRepository<User>().GetByGuidAsync(userId);
     }
-
+    
     public Task AddAsync(User entity)
     {
         return _unitOfWork.GetRepository<User>().AddAsync(entity);

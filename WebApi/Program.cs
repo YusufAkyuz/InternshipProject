@@ -15,7 +15,7 @@ builder.Services.RepositoryExtension(builder.Configuration);
 builder.Services.UnitOfWorkExtension();
 builder.Services.UserServiceExtension();
 
-Log.Logger = new LoggerConfiguration().WriteTo.Seq(serverUrl : "http://localhost:5341", apiKey:"GUev3iQYqovx4WUfqM3t").CreateLogger();
+Log.Logger = new LoggerConfiguration().WriteTo.Seq(serverUrl : "http://localhost:5341", apiKey:"66NV9bWgfz5wS5mdwJSd").CreateLogger();
 
 var app = builder.Build();
 
